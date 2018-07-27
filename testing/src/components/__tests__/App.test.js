@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 
 import App from '../App';
+import CommentBox from '../CommentBox';
 
 describe('the App component', () => {
   it('renders the comment box properly', () => {
-    const div = document.createElement('div');
+    const wrapper = shallow(<App />);
 
-    ReactDOM.render(<App />, div);
-
-    // inspect the div and see if CommentBox
-    // is rendered
-    expect(div.innerHTML).toContain('And this is the comment box!!');
-
-    ReactDOM.unmountComponentAtNode(div);
+    // expect to show just one instance of CommentBox
+    // inside the App Component
+    expect(wrapper.find(CommentBox).length).toEqual(1);
   });
 });
