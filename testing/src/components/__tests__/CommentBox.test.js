@@ -37,4 +37,14 @@ describe('CommentBox component', () => {
     // updated with what we gave it above
     expect(wrapper.find('textarea').prop('value')).toEqual('i love peaches');
   });
+
+  it('submits the form and clears the text area upon afterwards', () => {
+    wrapper.find('textarea').simulate('change', {
+      target: { value: 'this should be submitted' }
+    });
+
+    wrapper.find('form').simulate('submit');
+
+    expect(wrapper.find('textarea').prop('value')).toEqual('');
+  });
 });
