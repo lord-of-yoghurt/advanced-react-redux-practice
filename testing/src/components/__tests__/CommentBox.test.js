@@ -17,8 +17,10 @@ describe('CommentBox component', () => {
   it('has a text area and a button', () => {expect(wrapper.find('textarea').length).toEqual(1);
     expect(wrapper.find('button').length).toEqual(1);
   });
+});
 
-  it('allows users to type in the text area', () => {
+describe('CommentBox text area', () => {
+  beforeEach(() => {
     // find the textarea element and simulate an event
     // of the 'change' sort (even names come from HTML.)
     // the second argument is a fake event object, which
@@ -31,7 +33,9 @@ describe('CommentBox component', () => {
     // force the component to update immediately (setState
     // is asynchronous, and we don't wanna wait for it)
     wrapper.update();
+  });
 
+  it('allows users to type in the text area', () => {
     // for the expectation, find the textarea once again
     // and look at its 'value' property - it should be
     // updated with what we gave it above
@@ -39,11 +43,6 @@ describe('CommentBox component', () => {
   });
 
   it('submits the form and clears the text area upon afterwards', () => {
-    wrapper.find('textarea').simulate('change', {
-      target: { value: 'this should be submitted' }
-    });
-
-    wrapper.update();
     wrapper.find('form').simulate('submit');
     wrapper.update();
 
