@@ -43,7 +43,9 @@ describe('CommentBox component', () => {
       target: { value: 'this should be submitted' }
     });
 
+    wrapper.update();
     wrapper.find('form').simulate('submit');
+    wrapper.update();
 
     expect(wrapper.find('textarea').prop('value')).toEqual('');
   });
