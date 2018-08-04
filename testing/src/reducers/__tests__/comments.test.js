@@ -12,4 +12,10 @@ describe('Comments reducer', () => {
 
     expect(newState).toEqual(['Testing rules!']);
   });
+
+  it('handles actions of unknown types', () => {
+    const newState = commentsReducer([], { type: 'dunno' });
+
+    expect(newState).toEqual([]);
+  });
 });
