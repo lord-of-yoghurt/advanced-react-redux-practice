@@ -7,8 +7,12 @@ import CommentList from '../CommentList';
 let wrapper;
 
 beforeEach(() => {
+  const initialState = {
+    comments: ['Comment 1', 'Comment 2', 'Comment 3']
+  };
+
   wrapper = mount(
-    <Root>
+    <Root initialState={initialState}>
       <CommentList />
     </Root>
   );
@@ -16,6 +20,6 @@ beforeEach(() => {
 
 describe('The CommentList component', () => {
   it('creates one li per comment', () => {
-    expect(2 + 2).toEqual(4);
+    console.log(wrapper.find('li').length);
   });
 });
