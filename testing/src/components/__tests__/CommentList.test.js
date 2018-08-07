@@ -20,6 +20,11 @@ beforeEach(() => {
 
 describe('The CommentList component', () => {
   it('creates one li per comment', () => {
-    console.log(wrapper.find('li').length);
+    expect(wrapper.find('li').length).toEqual(3);
+  });
+
+  it('shows the text for each comment', () => {
+    expect(wrapper.render().text()).toContain('Comment 2');
+    expect(wrapper.render().text()).toContain('Comment 3');
   });
 });
