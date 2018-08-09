@@ -24,7 +24,7 @@ afterEach(() => {
 });
 
 describe('App integration', () => {
-  it('can fetch and display a list of comments', () => {
+  it('can fetch and display a list of comments', (done) => {
     // render the app
     const wrapper = mount(
       <Root>
@@ -36,6 +36,12 @@ describe('App integration', () => {
     wrapper.find('.fetch-comments').simulate('click');
 
     // expect to find a list of comments
-    expect(wrapper.find('li').length).toEqual(3);
+    setTimeout(() => {
+      wrapper.update();
+
+      expect(wrapper.find('li').length).toEqual(3);
+      done();
+      wrapper.unmount();
+    }, 50);
   });
 });
