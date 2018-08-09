@@ -36,12 +36,14 @@ describe('App integration', () => {
     wrapper.find('.fetch-comments').simulate('click');
 
     // expect to find a list of comments
-    setTimeout(() => {
+    // execute the callback function after
+    // the stub request is complete
+    moxios.wait(() => {
       wrapper.update();
 
       expect(wrapper.find('li').length).toEqual(3);
       done();
       wrapper.unmount();
-    }, 50);
+    });
   });
 });
