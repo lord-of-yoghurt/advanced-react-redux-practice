@@ -20,7 +20,7 @@ class CommentBox extends Component {
 
   shouldNavigateAway() {
     if (!this.props.auth) {
-      console.log('i don\'t belong here...');
+      this.props.history.push('/');
     }
   }
 
