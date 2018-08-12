@@ -27,8 +27,12 @@ export default (ChildComponent) => {
     }
 
     render() {
-      // it wraps the component generically passed into it
-      return <ChildComponent />;
+      // it wraps the component generically passed into it.
+      // spreading this.props is VITAL: we have to make sure
+      // that any props passed down to the HOC (history or
+      // actions from connect) are passed further down to the
+      // child component
+      return <ChildComponent {...this.props} />;
     }
   }
 
