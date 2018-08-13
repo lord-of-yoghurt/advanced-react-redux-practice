@@ -15,7 +15,7 @@ export default ({ dispatch }) => (next) => (action) => {
   // here, we overwrite the payload by calling `then`
   // of the current payload and creating a new action
   // in the callback. afterwards, we call dispatch with
-  // the new action. 
+  // the new action.
   action.payload.then((res) => {
     const newAction = { ...action, payload: res };
     dispatch(newAction);
