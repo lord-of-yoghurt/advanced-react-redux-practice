@@ -1,7 +1,6 @@
 /*
  * Imports
  */
-
 const express = require('express'),
       http = require('http'),
       bodyParser = require('body-parser'),
@@ -11,6 +10,9 @@ const express = require('express'),
 /*
  * App setup
  */
+app.use(morgan('combined'));
+// parse as json, no matter what type it is
+app.use(bodyParser.json({ type: '*/*' }));
 
 /*
  * Server setup
