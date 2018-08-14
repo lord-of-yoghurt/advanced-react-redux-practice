@@ -8,7 +8,7 @@ const express = require('express'),
       app = express();
 
 /*
- * File imports
+ * Route imports
  */
 require('./router')(app);
 
@@ -18,6 +18,11 @@ require('./router')(app);
 app.use(morgan('combined'));
 // parse as json, no matter what type it is
 app.use(bodyParser.json({ type: '*/*' }));
+
+/*
+ * Model imports
+ */
+require('./models/User');
 
 /*
  * Server setup
