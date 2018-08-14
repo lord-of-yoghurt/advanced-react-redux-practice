@@ -1,11 +1,16 @@
 /*
- * Imports
+ * Package imports
  */
 const express = require('express'),
       http = require('http'),
       bodyParser = require('body-parser'),
       morgan = require('morgan'),
       app = express();
+
+/*
+ * File imports
+ */
+require('./router')(app);
 
 /*
  * App setup
