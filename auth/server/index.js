@@ -9,12 +9,20 @@ const express = require('express'),
       app = express();
 
 /*
- * DB Setup
+ * App setup
+ */
+// parse as json, no matter what type it is
+app.use(bodyParser.json({ type: '*/*' }));
+app.use(morgan('combined'));
+
+/*
+ * DB/ORM Setup
  */
 const keys = require('./settings/keys');
 // use if offline
 // mongoose.connect('mongodb://localhost:27017/auth', { useNewUrlParser: true });
 mongoose.connect(`${keys.dbLink}`, { useNewUrlParser: true });
+mongoose.Promise = Promise;
 
 /*
  * Route imports
@@ -22,16 +30,9 @@ mongoose.connect(`${keys.dbLink}`, { useNewUrlParser: true });
 require('./router')(app);
 
 /*
- * App setup
- */
-app.use(morgan('combined'));
-// parse as json, no matter what type it is
-app.use(bodyParser.json({ type: '*/*' }));
-
-/*
  * Model imports
  */
-require('./models/User');
+const UserModel = require('./models/User');
 
 /*
  * Server setup
