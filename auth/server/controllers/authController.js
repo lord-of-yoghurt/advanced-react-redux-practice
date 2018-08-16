@@ -5,7 +5,7 @@ exports.signUp = (req, res, next) => {
         password = req.body.password;
 
   // TODO: add functionality to validate email addresses
-  
+
   if (!email || !password) {
     return res.status(422).send({ error: 'Email and password are required!' });
   }
@@ -18,7 +18,7 @@ exports.signUp = (req, res, next) => {
 
       newUser.save()
         .then(() => res.json(
-          { message: `User successfully created: ${newUser.email}` }
+          { message: `User successfully created: ${newUser.email}, ${newUser.password}` }
         ))
         .catch((e) => next(e));
     })
