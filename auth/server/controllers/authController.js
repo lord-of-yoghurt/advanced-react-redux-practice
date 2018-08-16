@@ -4,6 +4,12 @@ exports.signUp = (req, res, next) => {
   const email = req.body.email,
         password = req.body.password;
 
+  // TODO: add functionality to validate email addresses
+  
+  if (!email || !password) {
+    return res.status(422).send({ error: 'Email and password are required!' });
+  }
+
   User.findOne({ email })
     .then((user) => {
       if (user) return res.status(422).send({ error: 'User with this email already exists!' });
