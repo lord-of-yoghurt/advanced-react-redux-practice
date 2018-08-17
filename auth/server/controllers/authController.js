@@ -39,3 +39,8 @@ exports.signUp = (req, res, next) => {
     })
     .catch((e) => next(e));
 };
+
+exports.signIn = (req, res, next) => {
+  // email/password are ALREADY authenticated,
+  // so just give user the token
+};
