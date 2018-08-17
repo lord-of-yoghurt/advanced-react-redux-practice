@@ -22,7 +22,10 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
     .then((user) => {
       // if so, call done with existing user object.
       if (user) {
-        done(user);
+
+        // WARNING: ALWAYS make sure the first argument is either error or null!!!
+
+        done(null, user);
       // otherwise, call done without it
       } else {
         done(null, false);
