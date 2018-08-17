@@ -12,8 +12,21 @@ const keys = require('../settings/keys');
 const localOptions = { usernameField: 'email' };
 
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
-  // verify user name and password, call done if all good
-  
+  // verify email/password, call done if all good
+  User.findOne({ email })
+    .then((user) => {
+      // if there's no such user, don't even bother
+      if (!user) return done(null, false);
+      // is the incoming password the same as the
+      // hashed/salted password in the DB?
+      user.comparePassword(password, (err, isMatch) => {
+        if (err) return done(err);
+        if (!isMatch) return done(null, false);
+
+        return done(null, user);
+      })
+    })
+    .catch((e) => done(e));
 });
 
 /*******************
@@ -52,3 +65,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 
 // tell passport to use this strategy
 passport.use(jwtLogin);
+passport.use(localLogin);
