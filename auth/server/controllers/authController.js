@@ -42,5 +42,8 @@ exports.signUp = (req, res, next) => {
 
 exports.signIn = (req, res, next) => {
   // email/password are ALREADY authenticated,
-  // so just give user the token
+  // so just give user the token by referencing
+  // `req.user` as assigned by passport upon
+  // successful User instance retrieval
+  res.send({ token: getUserToken(req.user) });
 };

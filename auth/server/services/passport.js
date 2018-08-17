@@ -23,6 +23,9 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
         if (err) return done(err);
         if (!isMatch) return done(null, false);
 
+        // the cool part about this is that passport
+        // automatically puts the `user` on the `req`
+        // object that route handlers' callbacks receive
         return done(null, user);
       })
     })
