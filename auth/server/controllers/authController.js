@@ -5,8 +5,12 @@ const User = require('../models/User');
 
 const getUserToken = (user) => {
   const timestamp = new Date().getTime();
+  // this is the payload to use for passport's
+  // JWT strategy
   return jwt.encode({
+    // the subject
     sub: user.id,
+    // issued at
     iat: timestamp
   }, keys.jwtSecret);
 };

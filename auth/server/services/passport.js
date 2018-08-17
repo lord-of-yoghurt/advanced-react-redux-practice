@@ -4,3 +4,27 @@ const passport = require('passport'),
 
 const User = require('../models/User');
 const keys = require('../settings/keys');
+
+// create options for JWT strategy
+const jwtOptions = {};
+
+// create JWT strategy
+// the payload is a decoded jwt token
+const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+  // check if the user id from the payload exists
+  // in our database.
+  User.findById(payload.sub)
+    .then((user) => {
+      // if so, call done with existing user object.
+      if (user) {
+        done(user);
+      // otherwise, call done without it
+      } else {
+        done(null, false);
+      }
+    })
+    // if there's any kinda error, call done with it
+    .catch((e) => done(e, false));
+});
+
+// tell passport to use this strategy
