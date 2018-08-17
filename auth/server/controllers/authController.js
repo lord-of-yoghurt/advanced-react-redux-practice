@@ -1,4 +1,15 @@
+const jwt = require('jwt-simple');
+const keys = require('../settings/keys');
+
 const User = require('../models/User');
+
+const getUserToken = (user) => {
+  const timestamp = new Date().getTime();
+  return jwt.encode({
+    sub: user.id,
+    iat: timestamp
+  }, keys.jwtSecret);
+};
 
 exports.signUp = (req, res, next) => {
   const email = req.body.email,
@@ -18,7 +29,7 @@ exports.signUp = (req, res, next) => {
 
       newUser.save()
         .then(() => res.json(
-          { message: `User successfully created: ${newUser.email}, ${newUser.password}` }
+          { token: getUserToken(newUser) }
         ))
         .catch((e) => next(e));
     })
