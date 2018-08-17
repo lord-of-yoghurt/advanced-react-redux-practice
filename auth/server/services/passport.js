@@ -6,7 +6,12 @@ const User = require('../models/User');
 const keys = require('../settings/keys');
 
 // create options for JWT strategy
-const jwtOptions = {};
+const jwtOptions = {
+  // where to look for the token
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  // get the key to decode the payload
+  secretOrKey: keys.jwtSecret
+};
 
 // create JWT strategy
 // the payload is a decoded jwt token
@@ -28,3 +33,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 });
 
 // tell passport to use this strategy
+passport.use(jwtLogin);
