@@ -37,7 +37,7 @@ const UserModel = require('./models/User');
 /*
  * Server setup
  */
-const port = process.env.PORT || 3000,
+const port = process.env.PORT || 4000,
       server = http.createServer(app);
 
 server.listen(port);
