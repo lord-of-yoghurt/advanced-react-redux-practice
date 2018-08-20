@@ -6,6 +6,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       morgan = require('morgan'),
       mongoose = require('mongoose'),
+      cors = require('cors'),
       app = express();
 
 /*
@@ -13,6 +14,7 @@ const express = require('express'),
  */
 // parse as json, no matter what type it is
 app.use(bodyParser.json({ type: '*/*' }));
+app.use(cors()); // WARNING: allows CORS from anywhere, so change this as needed
 app.use(morgan('combined'));
 
 /*
