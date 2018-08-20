@@ -15,6 +15,8 @@ const BASE_URL = 'http://localhost:4000';
 // call on the `then` callback. in short, redux-thunk
 // lets us take full control over the dispatch function.
 
-export const signup = (formProps) => (dispatch) => {
-  axios.post(`${BASE_URL}/signup`, formProps);
+export const signup = (formProps) => async (dispatch) => {
+  const res = await axios.post(`${BASE_URL}/signup`, formProps);
+
+  dispatch({ type: AUTH_USER, payload: res.data.token });
 };
