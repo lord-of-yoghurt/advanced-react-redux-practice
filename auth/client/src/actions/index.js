@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { AUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR } from './types';
 
 const BASE_URL = 'http://localhost:4000';
 
@@ -16,7 +16,13 @@ const BASE_URL = 'http://localhost:4000';
 // lets us take full control over the dispatch function.
 
 export const signup = (formProps) => async (dispatch) => {
-  const res = await axios.post(`${BASE_URL}/signup`, formProps);
+  try {
+    const res = await axios.post(`${BASE_URL}/signup`, formProps);
 
-  dispatch({ type: AUTH_USER, payload: res.data.token });
+    dispatch({ type: AUTH_USER, payload: res.data.token });
+  } catch (e) {
+    dispatch({
+      type: AUTH_ERROR, payload: 'This email address is already in use!'
+    });
+  }
 };
