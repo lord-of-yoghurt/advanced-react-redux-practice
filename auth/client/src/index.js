@@ -13,8 +13,8 @@ import Signup from './components/auth/Signup';
 const store = createStore(reducers, {});
 
 const jsx = (
-  <Provider>
-    <BrowserRouter store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <App>
         <Route path="/" exact component={Welcome} />
         <Route path="/signup" component={Signup} />
