@@ -17,6 +17,7 @@ class Signup extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
+        <h4>Create New Account</h4>
         <fieldset>
           <label>Email</label>
           <Field
